@@ -35,16 +35,20 @@ last_number = 675810
 number_of_passwords = 0
 number_of_passwords_2 = 0
 
-current = first_number
-while current <= last_number:
+for current in range(first_number, last_number):
     if check_main_criteria(current):
         number_of_passwords += 1
         # print(current)
         if check_last_criteria(current):
             number_of_passwords_2 += 1
-            print(current)
-
-    current += 1
+            # print(current)
 
 print("Number of passwords: " + str(number_of_passwords))
 print("Number of passwords with last criteria: " + str(number_of_passwords_2))
+
+
+
+# Check new groupby feature
+# returns dataset: distinct char value and group of same chars
+# from itertools import groupby
+# block_length = [len(list(g)) for _, g in groupby(str(n))]
