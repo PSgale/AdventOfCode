@@ -14,7 +14,7 @@ def input_(memory, a):
 
 
 def output_(memory, a):
-    return memory[a]
+    return a
 
 
 # Opcode 5 is jump-if-true:
@@ -65,9 +65,10 @@ opcode_to_instruction = {
 }
 
 
-def retrieve_parameters(memory, position, num_params, param_types):
+def retrieve_parameters(memory, position, instruction_name, num_params, param_types):
     parameter_indices = memory[position: position + num_params]
-    for i in range(len(parameter_indices) - 1):
+    stop_index = 0 if instruction_name in ['output_', 'jump_if_true', 'jump_if_false'] else 1
+    for i in range(len(parameter_indices) - stop_index):
         if param_types[-i - 1] == '0':
             parameter_indices[i] = memory[parameter_indices[i]]
     return parameter_indices

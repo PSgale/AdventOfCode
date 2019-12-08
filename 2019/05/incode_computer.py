@@ -22,12 +22,12 @@ def execute_program(memory):
         if not instruction:
             raise Exception("Unknown opcode. Something went wrong.")
         elif instruction == 'stop':
-            print('Command: [' + str(memory[i]) + '] OptCode: ' + opcode[-2:] + ' (' + str(instruction) + ')')
+            print('At: ' + str(i) + ' Command: [' + str(memory[i]) + '] OptCode: ' + opcode[-2:] + ' (' + str(instruction) + ')')
             break
         i += 1
         # parameter_indices = memory[i: i + num_params]
-        parameters = retrieve_parameters(memory, i, num_params, params_types)
-        print('Command: ' + str(memory[i-1: i + num_params]) + ' OptCode: ' + opcode[-2:] + ' (' + instruction.__name__ + ') Parameters: ' + str(parameters))
+        parameters = retrieve_parameters(memory, i, instruction.__name__, num_params, params_types)
+        print('At: ' + str(i - 1) + ' Command: ' + str(memory[i-1: i + num_params]) + ' OptCode: ' + opcode[-2:] + ' (' + instruction.__name__ + ') Parameters: ' + str(parameters))
         rez = instruction(memory, *parameters)
         if instruction.__name__[0:5] == 'jump_' and rez:
             i = rez
@@ -78,7 +78,7 @@ print("%%% Test 5 %%%")
 memory = load_memory("incode_computer_t3.txt")
 memory, output = execute_program(memory)
 
-print(memory)
+# print(memory)
 assert memory[4] == 99, "Not expected result."
 
 
@@ -105,4 +105,4 @@ _, output = execute_program(memory)
 
 # Result
 print("Test Results : " + str(output))
-# assert output[-1] == 7692125, "Not expected result."
+# assert output[-1] == 14340395, "Not expected result."
