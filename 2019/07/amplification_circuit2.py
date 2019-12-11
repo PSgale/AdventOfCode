@@ -20,7 +20,7 @@ def execute_program(memory, phase_params, i=0):
         if not instruction:
             raise Exception("Unknown opcode. Something went wrong.")
         elif instruction == 'stop':
-            print('At: ' + str(i) + ' Command: [' + str(memory[i]) + '] OptCode: ' + opcode[-2:] + ' (' + str(instruction) + ')')
+            # print('At: ' + str(i) + ' Command: [' + str(memory[i]) + '] OptCode: ' + opcode[-2:] + ' (' + str(instruction) + ')')
             status = [0]
             break
         elif instruction.__name__ == 'input_' and len(phase_params) == 0:
@@ -28,11 +28,11 @@ def execute_program(memory, phase_params, i=0):
             break
         i += 1
         parameters = retrieve_parameters(memory, i, instruction.__name__, num_params, params_types, phase_params)
-        print('At: ' + str(i - 1) + ' Command: ' + str(memory[i-1: i + num_params]) + ' OptCode: ' + opcode[-2:] + ' (' + instruction.__name__ + ') Parameters: ' + str(parameters))
+        # print('At: ' + str(i - 1) + ' Command: ' + str(memory[i-1: i + num_params]) + ' OptCode: ' + opcode[-2:] + ' (' + instruction.__name__ + ') Parameters: ' + str(parameters))
         rez = instruction(memory, *parameters)
         if instruction.__name__[0:5] == 'jump_' and rez:
             i = rez
-            print('Jump to: ' + str(rez) + ' Next OptCode: ' + ('00000' + str(memory[i])))
+            # print('Jump to: ' + str(rez) + ' Next OptCode: ' + ('00000' + str(memory[i])))
         else:
             if not (rez is None):
                 output.append(rez)
@@ -41,25 +41,27 @@ def execute_program(memory, phase_params, i=0):
 
 
 def run_circuit(memory, phase_settings):
-    output = [0, 0, 0, 0, 0]
+    phase_params = [[0], [0], [0], [0], [0]]
     memory_copy = [memory[:], memory[:], memory[:], memory[:], memory[:]]
     status = [[1, 0], [1, 0], [1, 0], [1, 0], [1, 0]]
 
+    cycle = 1
     while any(item[0] > 0 for item in status):
         # 5 amplifiers: A to E
         for i in range(5):
             if status[i][0] == 1:
-                print('Amplifier: ' + str(i + 1))
-                phase_params = [output[i], phase_settings[i]]
-                print(memory_copy[i])
-                memory_copy[i], rez, status[i] = execute_program(memory_copy[i], phase_params, status[i][1])
-                print(memory_copy[i])
-                result = rez[-1]
+                # print('Iteration: ' + str(cycle) + '. Amplifier: ' + str(i + 1))
+                #print(memory_copy[i])
+                if cycle == 1:
+                    phase_params[i].append(phase_settings[i])
+                memory_copy[i], rez, status[i] = execute_program(memory_copy[i], phase_params[i], status[i][1])
+                #print(memory_copy[i])
+                result = rez[0]
                 if i == 4:
-                    output[0] = result
+                    phase_params[0] = rez
                 else:
-                    output[i+1] = result
-
+                    phase_params[i+1] = rez
+        cycle += 1
     return result
 
 
@@ -86,8 +88,6 @@ def search_best_order(memory):
             if output > output_max:
                 output_max = output
                 best_settings = Phase_Settings
-            print(Phase_Settings)
-            print(output)
     return output_max, best_settings
 
 
@@ -97,60 +97,39 @@ def search_best_order(memory):
 
 
 print("%%% Test 1 %%%")
-output = load_memory("amplification_circuit2_t1.txt")
+Memory = load_memory("amplification_circuit2_t1.txt")
 Phase_Settings = [9, 8, 7, 6, 5]
-output = run_circuit(output, Phase_Settings)
+Output = run_circuit(Memory, Phase_Settings)
 
-Expected = 43210
-# assert Output_Max == Expected, "Not expected result."
-print("Output: " + str(output))
-print("Setting: " + str(Phase_Settings))
+Expected = 139629729
+assert Output == Expected, "Not expected result."
+
 
 
 print("%%% Test 2 %%%")
-output = load_memory("amplification_circuit2_t2.txt")
-Phase_Settings = [9, 7, 8, 5, 6]
-output = run_circuit(output, Phase_Settings)
+Memory = load_memory("amplification_circuit2_t1.txt")
+Output_Max, Best_Settings = search_best_order(Memory)
 
-Expected = 43210
-# assert Output_Max == Expected, "Not expected result."
-print("Output: " + str(output))
-print("Setting: " + str(Phase_Settings))
+Expected = 139629729
+assert Output_Max == Expected, "Not expected result."
 
 
-# print("%%% Test 1 %%%")
-# Memory = load_memory("amplification_circuit2_t1.txt")
-# Output_Max, Best_Settings = search_best_order(Memory)
-#
-# Expected = 43210
-# # assert Output_Max == Expected, "Not expected result."
-# print("Output Max: " + str(Output_Max))
-# print("Best Setting: " + str(Best_Settings))
+
+print("%%% Test 3 %%%")
+Memory = load_memory("amplification_circuit2_t2.txt")
+Output_Max, Best_Settings = search_best_order(Memory)
+
+Expected = 18216
+assert Output_Max == Expected, "Not expected result."
 
 
-# print("%%% Test 2 %%%")
-# Memory = load_memory("amplification_circuit_t2.txt")
-# Output_Max, Best_Settings = search_best_order(Memory)
-#
-# Expected = 54321
-# assert Output_Max == Expected, "Not expected result."
-#
-#
-# print("%%% Test 3 %%%")
-# Memory = load_memory("amplification_circuit_t3.txt")
-# Output_Max, Best_Settings = search_best_order(Memory)
-#
-# Expected = 65210
-# assert Output_Max == Expected, "Not expected result."
-#
-#
-# print("%%% RUN %%%")
-# # 1.
-# Memory = load_memory("amplification_circuit.txt")
-# Output_Max, Best_Settings = search_best_order(Memory)
-#
-# print(Output_Max)
-# print(Best_Settings)
+print("%%% RUN %%%")
+# 2.
+Memory = load_memory("amplification_circuit2.txt")
+Output_Max, Best_Settings = search_best_order(Memory)
+
+print(Output_Max)
+print(Best_Settings)
 
 
 
