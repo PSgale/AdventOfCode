@@ -177,7 +177,7 @@ print("%%% Test 3 %%%")
 Map = read_map("monitoring_station_t3.txt")
 Max_Asteroids, From_Asteroid, Max_Visible = process_map(Map)
 Vaporized = vaporize(Max_Visible, 9)
-print_map(Map, Vaporized)
+# print_map(Map, Vaporized)
 
 # print(Vaporized)
 
@@ -191,7 +191,7 @@ print("%%% Test 4 %%%")
 Map = read_map("monitoring_station_t1.txt")
 Max_Asteroids, From_Asteroid, Max_Visible = process_map(Map)
 Vaporized = vaporize(Max_Visible, 8)
-print_map(Map, Vaporized)
+# print_map(Map, Vaporized)
 
 # print(Max_Visible)
 # print(Vaporized)
@@ -212,4 +212,4 @@ print("From Asteroid : " + str(From_Asteroid) + " Max Asteroids : " + str(Max_As
 Vaporized = vaporize(Max_Visible, 201)
 # print_map(Map, Vaporized)
 
-print(Vaporized)
+# print(Vaporized)
