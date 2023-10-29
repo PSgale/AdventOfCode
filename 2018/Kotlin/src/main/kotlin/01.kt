@@ -18,15 +18,13 @@ private fun readFrequency(it: String, isDebug: Boolean = false): Int {
     val file = File(it)
 
     var cumSum = 0
-    val seen = mutableSetOf<Int>()
 
     try {
         BufferedReader(FileReader(file)).use { br ->
-            br.lines().forEach lit@{
+            br.lines().forEach {
                 cumSum += Integer.parseInt(it)
             }
         }
-
     } catch (e: IOException) {
         e.printStackTrace()
     }
