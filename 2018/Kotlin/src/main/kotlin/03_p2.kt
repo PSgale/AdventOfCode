@@ -48,6 +48,11 @@ private fun getSumOfClaims(fabric:Array<Array<Int>>, offsetLeft: Int, offsetTop:
 
     for (i in offsetLeft until offsetLeft + width) {
         for (j in offsetTop until  offsetTop + height) {
+
+            // collision found
+            if (fabric[i][j] > 1)
+                return -1
+
             SumOfClaims += fabric[i][j]
         }
     }
