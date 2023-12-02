@@ -1,5 +1,5 @@
 from helpers import readFileLines
-import numpy
+from functools import reduce
 import re
 
 CUBES = re.compile(r"(\d+)\s(blue|green|red)")
@@ -31,7 +31,7 @@ def getPossibleGames(file, isDebug = False):
             print(game_id, "--", outcomes)
 
         game = PossibleGame(outcomes, isDebug)
-        power = numpy.prod(list(game.values()))
+        power = reduce(lambda a, b: a * b, list(game.values()))
         total += power
 
         if isDebug:
