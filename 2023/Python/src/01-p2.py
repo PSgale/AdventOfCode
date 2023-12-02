@@ -17,7 +17,7 @@ def geCalibrationValue(file, isDebug = False):
     return total
 
 
-print("%%% Test 2 %%%")
+print("%%% Test %%%")
 value = geCalibrationValue("01-calibration-document-t2.txt", True)
 
 Expected = 281
@@ -25,7 +25,7 @@ print("Calibration value: ", value)
 assert value == Expected, "Not expected result."
 
 
-print("%%% Unit 2 %%%")
+print("%%% Unit %%%")
 value = geCalibrationValue("01-calibration-document-p1.txt")
 
 Expected = 55093
