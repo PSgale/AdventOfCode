@@ -49,9 +49,3 @@ value = getPossibleGames("02-cube-game-outcomes-p1.txt", initial)
 Expected = 2810
 print("The sum of the IDs of possible games: ", value)
 assert value == Expected, "Not expected result."
-
-
-
-# p = re.compile(r'(?P<word>\b\w+\b)')
-# m = p.search( '(((( Lots of punctuation )))' )
-# m.group('word')
