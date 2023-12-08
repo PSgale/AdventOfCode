@@ -10,9 +10,10 @@ def indentifyCard(line, isDebug=False):
     numbers = list(filter(lambda x: (x != ''), numbers.strip().split(" ")))
     numbers_winning = {k: k for k in list(filter(lambda x: (x != ''), numbers_winning.strip().split(" ")))}
 
-    for val in numbers:
-        if val in numbers_winning:
-            win.append(val)
+    # for val in numbers:
+    #    if val in numbers_winning:
+    #         win.append(val)
+    win.extend(val for val in numbers if val in numbers_winning)
 
     if isDebug:
         print(card_id, '', numbers_winning, ' <=> ', numbers)
