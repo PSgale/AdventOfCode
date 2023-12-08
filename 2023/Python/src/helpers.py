@@ -3,7 +3,7 @@ def readFileLines(file):
     _lines = []
 
     with open('../data/' + file, 'r') as f:
-        _lines = [i for i in f]
+        _lines = [i.strip() for i in f]
 
     return _lines
 
