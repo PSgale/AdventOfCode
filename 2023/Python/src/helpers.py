@@ -14,3 +14,18 @@ def replaceCharDic(line, to_replace):
         line = line.replace(char, to_replace[char])
 
     return line
+
+
+# Greatest Common Divisor (GCD)
+# The GCD of two or more integers is the largest integer that divides each of the integers
+def gcd(a, b):
+    if a == 0 or b == 0:
+        return max(a, b)
+
+    return gcd(a % b, b) if a > b else gcd(a, b % a)
+
+
+# Least Common Multiple (LCM)
+# The LCM is the smallest number that is divisible by all given numbers
+def lcm(a, b):
+    return int(a * b / gcd(a, b))
