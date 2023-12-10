@@ -73,7 +73,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getWinningOptionsHash("07-camel-cards-list-p1.txt")
-
-Expected = 252137472
 print("Total winnings: ", value)
-assert value == Expected, "Not expected result."

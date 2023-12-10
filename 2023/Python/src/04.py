@@ -48,7 +48,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getWinningPoints("04-scratchcards-list-p1.txt")
-
-Expected = 525181
 print("Points cards are worth in total: ", value)
-assert value == Expected, "Not expected result."

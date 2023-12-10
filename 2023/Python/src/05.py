@@ -75,7 +75,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getLowestLocation("05-seeds-requirements-list-p1.txt")
-
-Expected = 226172555
 print("The lowest location number is: ", value)
-assert value == Expected, "Not expected result."

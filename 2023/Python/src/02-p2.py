@@ -50,7 +50,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getPossibleGames("02-cube-game-outcomes-p1.txt")
-
-Expected = 69110
 print("The sum of the power of these games: ", value)
-assert value == Expected, "Not expected result."

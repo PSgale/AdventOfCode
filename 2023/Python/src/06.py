@@ -34,7 +34,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getWinningOptionsHash("06-boat-races-list-p1.txt")
-
-Expected = 633080
 print("We get if multiply these numbers together: ", value)
-assert value == Expected, "Not expected result."

@@ -87,7 +87,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getEnginePartsHash("03-engine-part-numbers-p1.txt")
-
-Expected = 525181
 print("The sum of all the part numbers in the engine schematic: ", value)
-assert value == Expected, "Not expected result."

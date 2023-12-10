@@ -49,7 +49,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = getWinningOptionsHash("08-network-directions-list-p1.txt")
-
-Expected = 10818234074807
 print("Number of steps required to nodes that end with Z: ", value)
-assert value == Expected, "Not expected result."

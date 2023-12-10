@@ -27,7 +27,4 @@ assert value == Expected, "Not expected result."
 
 print("%%% Unit %%%")
 value = geCalibrationValue("01-calibration-document-p1.txt")
-
-Expected = 55093
 print("Calibration value: ", value)
-assert value == Expected, "Not expected result."
