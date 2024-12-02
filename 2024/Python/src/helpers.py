@@ -15,6 +15,14 @@ def replaceCharDic(line, to_replace):
 
     return line
 
+# Exclude element from a list by index
+def excludeElement(numbers, exclude_index):
+    output = []
+    for index, item in enumerate(numbers):
+        if index == exclude_index:
+            continue
+        output.append(item)
+    return output
 
 # Greatest Common Divisor (GCD)
 # The GCD of two or more integers is the largest integer that divides each of the integers
